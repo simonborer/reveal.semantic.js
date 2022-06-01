@@ -61,7 +61,7 @@ $selectionColor: #fff;
     text-shadow: 1px 1px $coal;
 }
 
-section.has-light-background {
+[data-slide].has-light-background {
 	p, h1, h2, h3, h4 {
 		text-shadow: none;
 	}

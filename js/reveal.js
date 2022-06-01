@@ -252,7 +252,7 @@ export default function( revealElement, options ) {
 	function removeHiddenSlides() {
 
 		if( !config.showHiddenSlides ) {
-			Util.queryAll( dom.wrapper, 'section[data-visibility="hidden"]' ).forEach( slide => {
+			Util.queryAll( dom.wrapper, '[data-slide][data-visibility="hidden"]' ).forEach( slide => {
 				slide.parentNode.removeChild( slide );
 			} );
 		}
@@ -918,7 +918,7 @@ export default function( revealElement, options ) {
 					}
 
 					if( config.center || slide.classList.contains( 'center' ) ) {
-						// Vertical stacks are not centred since their section
+						// Vertical stacks are not centred since their [data-slide]
 						// children will be
 						if( slide.classList.contains( 'stack' ) ) {
 							slide.style.top = 0;
@@ -968,7 +968,7 @@ export default function( revealElement, options ) {
 	function layoutSlideContents( width, height ) {
 
 		// Handle sizing of elements with the 'r-stretch' class
-		Util.queryAll( dom.slides, 'section > .stretch, section > .r-stretch' ).forEach( element => {
+		Util.queryAll( dom.slides, '[data-slide] > .stretch, [data-slide] > .r-stretch' ).forEach( element => {
 
 			// Determine how much vertical space we can use
 			let remainingHeight = Util.getRemainingHeight( element, height );
@@ -1077,7 +1077,7 @@ export default function( revealElement, options ) {
 	 */
 	function isVerticalSlide( slide = currentSlide ) {
 
-		return slide && slide.parentNode && !!slide.parentNode.nodeName.match( /section/i );
+		return slide && slide.parentNode && !!(typeof slide.parentNode.dataset.slide !== 'undefined');
 
 	}
 
@@ -1289,7 +1289,7 @@ export default function( revealElement, options ) {
 		// Find the current horizontal slide and any possible vertical slides
 		// within it
 		let currentHorizontalSlide = horizontalSlides[ indexh ],
-			currentVerticalSlides = currentHorizontalSlide.querySelectorAll( 'section' );
+			currentVerticalSlides = currentHorizontalSlide.querySelectorAll( '[data-slide]' );
 
 		// Store references to the previous and current slides
 		currentSlide = currentVerticalSlides[ indexv ] || currentHorizontalSlide;
@@ -1510,7 +1510,7 @@ export default function( revealElement, options ) {
 
 		getHorizontalSlides().forEach( horizontalSlide => {
 
-			Util.queryAll( horizontalSlide, 'section' ).forEach( ( verticalSlide, y ) => {
+			Util.queryAll( horizontalSlide, '[data-slide]' ).forEach( ( verticalSlide, y ) => {
 
 				if( y > 0 ) {
 					verticalSlide.classList.remove( 'present' );
@@ -1541,7 +1541,7 @@ export default function( revealElement, options ) {
 			}
 
 			// Randomize the order of vertical slides (if there are any)
-			let verticalSlides = slide.querySelectorAll( 'section' );
+			let verticalSlides = slide.querySelectorAll( '[data-slide]' );
 			if( verticalSlides.length ) {
 				shuffle( verticalSlides );
 			}
@@ -1606,7 +1606,7 @@ export default function( revealElement, options ) {
 				element.setAttribute( 'aria-hidden', 'true' );
 
 				// If this element contains vertical slides
-				if( element.querySelector( 'section' ) ) {
+				if( element.querySelector( '[data-slide]' ) ) {
 					element.classList.add( 'stack' );
 				}
 
@@ -1737,7 +1737,7 @@ export default function( revealElement, options ) {
 			for( let x = 0; x < horizontalSlidesLength; x++ ) {
 				let horizontalSlide = horizontalSlides[x];
 
-				let verticalSlides = Util.queryAll( horizontalSlide, 'section' ),
+				let verticalSlides = Util.queryAll( horizontalSlide, '[data-slide]' ),
 					verticalSlidesLength = verticalSlides.length;
 
 				// Determine how far away this slide is from the present
@@ -1874,7 +1874,7 @@ export default function( revealElement, options ) {
 		mainLoop: for( let i = 0; i < horizontalSlides.length; i++ ) {
 
 			let horizontalSlide = horizontalSlides[i];
-			let verticalSlides = horizontalSlide.querySelectorAll( 'section' );
+			let verticalSlides = horizontalSlide.querySelectorAll( '[data-slide]' );
 
 			for( let j = 0; j < verticalSlides.length; j++ ) {
 
@@ -1895,7 +1895,7 @@ export default function( revealElement, options ) {
 				break;
 			}
 
-			// Don't count the wrapping section for vertical slides and
+			// Don't count the wrapping [data-slide] for vertical slides and
 			// slides marked as uncounted
 			if( horizontalSlide.classList.contains( 'stack' ) === false && horizontalSlide.dataset.visibility !== 'uncounted' ) {
 				pastCount++;
@@ -1975,7 +1975,7 @@ export default function( revealElement, options ) {
 
 			// If this is a vertical slide, grab the vertical index
 			if( isVertical ) {
-				v = Math.max( Util.queryAll( slide.parentNode, 'section' ).indexOf( slide ), 0 );
+				v = Math.max( Util.queryAll( slide.parentNode, '[data-slide]' ).indexOf( slide ), 0 );
 			}
 		}
 
@@ -2021,7 +2021,7 @@ export default function( revealElement, options ) {
 	 */
 	function getVerticalSlides() {
 
-		return Util.queryAll( dom.wrapper, '.slides>section>section' );
+		return Util.queryAll( dom.wrapper, '.slides>[data-slide]>[data-slide]' );
 
 	}
 
@@ -2089,7 +2089,7 @@ export default function( revealElement, options ) {
 	function getSlide( x, y ) {
 
 		let horizontalSlide = getHorizontalSlides()[ x ];
-		let verticalSlides = horizontalSlide && horizontalSlide.querySelectorAll( 'section' );
+		let verticalSlides = horizontalSlide && horizontalSlide.querySelectorAll( '[data-slide]' );
 
 		if( verticalSlides && verticalSlides.length && typeof y === 'number' ) {
 			return verticalSlides ? verticalSlides[ y ] : undefined;
@@ -2361,7 +2361,7 @@ export default function( revealElement, options ) {
 				// When going backwards and arriving on a stack we start
 				// at the bottom of the stack
 				if( previousSlide && previousSlide.classList.contains( 'stack' ) ) {
-					let v = ( previousSlide.querySelectorAll( 'section' ).length - 1 ) || undefined;
+					let v = ( previousSlide.querySelectorAll( '[data-slide]' ).length - 1 ) || undefined;
 					let h = indexh - 1;
 					slide( h, v );
 				}
@@ -2464,7 +2464,7 @@ export default function( revealElement, options ) {
 	 */
 	function onTransitionEnd( event ) {
 
-		if( transition === 'running' && /section/gi.test( event.target.nodeName ) ) {
+		if( transition === 'running' && typeof event.target.dataset.slide !== 'undefined' ) {
 			transition = 'idle';
 			dispatchEvent({
 				type: 'slidetransitionend',

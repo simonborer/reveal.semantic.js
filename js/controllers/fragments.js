@@ -151,7 +151,7 @@ export default class Fragments {
 
 		this.Reveal.getHorizontalSlides().forEach( horizontalSlide => {
 
-			let verticalSlides = queryAll( horizontalSlide, 'section' );
+			let verticalSlides = queryAll( horizontalSlide, '[data-slide]' );
 			verticalSlides.forEach( ( verticalSlide, y ) => {
 
 				this.sort( verticalSlide.querySelectorAll( '.fragment' ) );
@@ -247,7 +247,7 @@ export default class Fragments {
 
 				} );
 
-				// Write the current fragment index to the slide <section>.
+				// Write the current fragment index to the slide.
 				// This can be used by end users to apply styles based on
 				// the current fragment index.
 				index = typeof index === 'number' ? index : -1;

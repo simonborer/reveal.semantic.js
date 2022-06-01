@@ -91,7 +91,7 @@ export default class Overview {
 
 			if( hslide.classList.contains( 'stack' ) ) {
 
-				queryAll( hslide, 'section' ).forEach( ( vslide, v ) => {
+				queryAll( hslide, '[data-slide]' ).forEach( ( vslide, v ) => {
 					vslide.setAttribute( 'data-index-h', h );
 					vslide.setAttribute( 'data-index-v', v );
 
@@ -232,7 +232,7 @@ export default class Overview {
 
 			let element = event.target;
 
-			while( element && !element.nodeName.match( /section/gi ) ) {
+			while( element && !(typeof element.dataset.slide !== 'undefined') ) {
 				element = element.parentNode;
 			}
 
@@ -240,7 +240,7 @@ export default class Overview {
 
 				this.deactivate();
 
-				if( element.nodeName.match( /section/gi ) ) {
+				if( typeof element.dataset.slide !== 'undefined' ) {
 					let h = parseInt( element.getAttribute( 'data-index-h' ), 10 ),
 						v = parseInt( element.getAttribute( 'data-index-v' ), 10 );
 

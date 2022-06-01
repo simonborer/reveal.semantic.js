@@ -178,16 +178,16 @@ const Plugin = () => {
 		for( var i = 0, len = sectionStack.length; i < len; i++ ) {
 			// vertical
 			if( sectionStack[i] instanceof Array ) {
-				markdownSections += '<section '+ options.attributes +'>';
+				markdownSections += '<section data-slide '+ options.attributes +'>';
 
 				sectionStack[i].forEach( function( child ) {
-					markdownSections += '<section data-markdown>' + createMarkdownSlide( child, options ) + '</section>';
+					markdownSections += '<section data-slide data-markdown>' + createMarkdownSlide( child, options ) + '</section>';
 				} );
 
 				markdownSections += '</section>';
 			}
 			else {
-				markdownSections += '<section '+ options.attributes +' data-markdown>' + createMarkdownSlide( sectionStack[i], options ) + '</section>';
+				markdownSections += '<section data-slide '+ options.attributes +' data-markdown>' + createMarkdownSlide( sectionStack[i], options ) + '</section>';
 			}
 		}
 
@@ -206,7 +206,7 @@ const Plugin = () => {
 
 			var externalPromises = [];
 
-			[].slice.call( scope.querySelectorAll( 'section[data-markdown]:not([data-markdown-parsed])') ).forEach( function( section, i ) {
+			[].slice.call( scope.querySelectorAll( '[data-slide][data-markdown]:not([data-markdown-parsed])') ).forEach( function( section, i ) {
 
 				if( section.getAttribute( 'data-markdown' ).length ) {
 
@@ -224,7 +224,7 @@ const Plugin = () => {
 
 						// Failed to load markdown
 						function( xhr, url ) {
-							section.outerHTML = '<section data-state="alert">' +
+							section.outerHTML = '<section data-slide data-state="alert">' +
 								'ERROR: The attempt to fetch ' + url + ' failed with HTTP status ' + xhr.status + '.' +
 								'Check your browser\'s JavaScript console for more details.' +
 								'<p>Remember that you need to serve the presentation HTML from a HTTP server.</p>' +
@@ -352,7 +352,7 @@ const Plugin = () => {
 					}
 				}
 				var parentSection = section;
-				if( childElement.nodeName ==  "section" ) {
+				if( typeof childElement.dataset.slide !== 'undefined' ) {
 					parentSection = childElement ;
 					previousParentElement = childElement ;
 				}

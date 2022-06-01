@@ -71,7 +71,7 @@ html.print-pdf {
 		page-break-after: always;
 	}
 
-	.reveal .slides section {
+	.reveal .slides [data-slide] {
 		visibility: visible !important;
 		display: block !important;
 		position: absolute !important;
@@ -87,7 +87,7 @@ html.print-pdf {
 		transform: none !important;
 	}
 
-	.reveal section.stack {
+	.reveal [data-slide].stack {
 		position: relative !important;
 		margin: 0 !important;
 		padding: 0 !important;

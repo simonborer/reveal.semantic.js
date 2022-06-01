@@ -20,11 +20,11 @@
 
 			<div class="slides">
 
-				<section data-visibility="hidden">
+				<section data-slide data-visibility="hidden">
 					This should be remove by reveal.js before our tests run.
 				</section>
 
-				<section data-background-image="examples/assets/image1.png">
+				<section data-slide data-background-image="examples/assets/image1.png">
 					<h1>1</h1>
 					<img data-src="">
 					<video data-src=""></video>
@@ -32,20 +32,20 @@
 					<aside class="notes">speaker notes 1</aside>
 				</section>
 
-				<section>
-					<section data-background="examples/assets/image2.png" data-notes="speaker notes 2">
+				<section data-slide>
+					<section data-slide data-background="examples/assets/image2.png" data-notes="speaker notes 2">
 						<h1>2.1</h1>
 					</section>
-					<section data-background-image="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEASABIAAD/4gIcSUNDX1BST0ZJTEUAAQEAAAIMbGNtcwIQAABtbnRyUkdCIFhZWiAH3AABABkAAwApADlhY3NwQVBQTAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA9tYAAQAAAADTLWxjbXMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAApkZXNjAAAA/">
+					<section data-slide data-background-image="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEASABIAAD/4gIcSUNDX1BST0ZJTEUAAQEAAAIMbGNtcwIQAABtbnRyUkdCIFhZWiAH3AABABkAAwApADlhY3NwQVBQTAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA9tYAAQAAAADTLWxjbXMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAApkZXNjAAAA/">
 						<h1>2.2</h1>
 					</section>
-					<section>
+					<section data-slide>
 						<h1>2.3</h1>
 					</section>
 				</section>
 
-				<section id="fragment-slides">
-					<section>
+				<section data-slide id="fragment-slides">
+					<section data-slide>
 						<h1>3.1</h1>
 						<ul>
 							<li class="fragment">4.1</li>
@@ -54,7 +54,7 @@
 						</ul>
 					</section>
 
-					<section>
+					<section data-slide>
 						<h1>3.2</h1>
 						<ul>
 							<li class="fragment" data-fragment-index="0">4.1</li>
@@ -63,7 +63,7 @@
 						<iframe data-src="http://example.com"></iframe>
 					</section>
 
-					<section id="fragments3">
+					<section data-slide id="fragments3">
 						<h1>3.3</h1>
 						<ul>
 							<li class="fragment" data-fragment-index="1">3.3.1</li>
@@ -73,7 +73,7 @@
 					</section>
 				</section>
 
-				<section>
+				<section data-slide>
 					<h1>4</h1>
 				</section>
 
@@ -108,16 +108,16 @@
 				QUnit.module( 'DOM' );
 
 				QUnit.test( 'Initial slides classes', function( assert ) {
-					var horizontalSlides = document.querySelectorAll( '.reveal .slides>section' )
+					var horizontalSlides = document.querySelectorAll( '.reveal .slides>[data-slide]' )
 
-					assert.strictEqual( document.querySelectorAll( '.reveal .slides section[data-visibility="hidden"]' ).length, 0, 'no data-visibility="hidden" slides' );
-					assert.strictEqual( document.querySelectorAll( '.reveal .slides section.past' ).length, 0, 'no .past slides' );
-					assert.strictEqual( document.querySelectorAll( '.reveal .slides section.present' ).length, 1, 'one .present slide' );
-					assert.strictEqual( document.querySelectorAll( '.reveal .slides>section.future' ).length, horizontalSlides.length - 1, 'remaining horizontal slides are .future' );
+					assert.strictEqual( document.querySelectorAll( '.reveal .slides [data-slide][data-visibility="hidden"]' ).length, 0, 'no data-visibility="hidden" slides' );
+					assert.strictEqual( document.querySelectorAll( '.reveal .slides [data-slide].past' ).length, 0, 'no .past slides' );
+					assert.strictEqual( document.querySelectorAll( '.reveal .slides [data-slide].present' ).length, 1, 'one .present slide' );
+					assert.strictEqual( document.querySelectorAll( '.reveal .slides>[data-slide].future' ).length, horizontalSlides.length - 1, 'remaining horizontal slides are .future' );
 
-					assert.strictEqual( document.querySelectorAll( '.reveal .slides section.stack' ).length, 2, 'two .stacks' );
+					assert.strictEqual( document.querySelectorAll( '.reveal .slides [data-slide].stack' ).length, 2, 'two .stacks' );
 
-					assert.ok( document.querySelectorAll( '.reveal .slides section.stack' )[0].querySelectorAll( '.future' ).length > 0, 'vertical slides are given .future' );
+					assert.ok( document.querySelectorAll( '.reveal .slides [data-slide].stack' )[0].querySelectorAll( '.future' ).length > 0, 'vertical slides are given .future' );
 				});
 
 				// ---------------------------------------------------------------
@@ -174,7 +174,7 @@
 					Reveal.slide( 0, 0 );
 					assert.strictEqual( Reveal.isLastSlide(), false, 'false after Reveal.slide( 0, 0 )' );
 
-					var lastSlideIndex = document.querySelectorAll( '.reveal .slides>section' ).length - 1;
+					var lastSlideIndex = document.querySelectorAll( '.reveal .slides>[data-slide]' ).length - 1;
 
 					Reveal.slide( lastSlideIndex, 0 );
 					assert.strictEqual( Reveal.isLastSlide(), true, 'true after Reveal.slide( '+ lastSlideIndex +', 0 )' );
@@ -184,7 +184,7 @@
 				});
 
 				QUnit.test( 'Reveal.isLastSlide after vertical slide', function( assert ) {
-					var lastSlideIndex = document.querySelectorAll( '.reveal .slides>section' ).length - 1;
+					var lastSlideIndex = document.querySelectorAll( '.reveal .slides>[data-slide]' ).length - 1;
 
 					Reveal.slide( 1, 1 );
 					Reveal.slide( lastSlideIndex );
@@ -216,10 +216,10 @@
 				});
 
 				QUnit.test( 'Reveal.getSlide', function( assert ) {
-					assert.equal( Reveal.getSlide( 0 ), document.querySelector( '.reveal .slides>section:first-child' ), 'gets correct first slide' );
-					assert.equal( Reveal.getSlide( 1 ), document.querySelector( '.reveal .slides>section:nth-child(2)' ), 'no v index returns stack' );
-					assert.equal( Reveal.getSlide( 1, 0 ), document.querySelector( '.reveal .slides>section:nth-child(2)>section:nth-child(1)' ), 'v index 0 returns first vertical child' );
-					assert.equal( Reveal.getSlide( 1, 1 ), document.querySelector( '.reveal .slides>section:nth-child(2)>section:nth-child(2)' ), 'v index 1 returns second vertical child' );
+					assert.equal( Reveal.getSlide( 0 ), document.querySelector( '.reveal .slides>[data-slide]:first-child' ), 'gets correct first slide' );
+					assert.equal( Reveal.getSlide( 1 ), document.querySelector( '.reveal .slides>[data-slide]:nth-child(2)' ), 'no v index returns stack' );
+					assert.equal( Reveal.getSlide( 1, 0 ), document.querySelector( '.reveal .slides>[data-slide]:nth-child(2)>[data-slide]:nth-child(1)' ), 'v index 0 returns first vertical child' );
+					assert.equal( Reveal.getSlide( 1, 1 ), document.querySelector( '.reveal .slides>[data-slide]:nth-child(2)>[data-slide]:nth-child(2)' ), 'v index 1 returns second vertical child' );
 
 					assert.strictEqual( Reveal.getSlide( 100 ), undefined, 'undefined when out of horizontal bounds' );
 					assert.strictEqual( Reveal.getSlide( 1, 100 ), undefined, 'undefined when out of vertical bounds' );
@@ -240,15 +240,15 @@
 					assert.ok( Reveal.getSlideNotes() === 'speaker notes 1', 'works with <aside class="notes">' );
 
 					Reveal.slide( 1, 0 );
-					assert.ok( Reveal.getSlideNotes() === 'speaker notes 2', 'works with <section data-notes="">' );
+					assert.ok( Reveal.getSlideNotes() === 'speaker notes 2', 'works with <section data-slide data-notes="">' );
 				});
 
 				QUnit.test( 'Reveal.getPreviousSlide/getCurrentSlide', function( assert ) {
 					Reveal.slide( 0, 0 );
 					Reveal.slide( 1, 0 );
 
-					var firstSlide = document.querySelector( '.reveal .slides>section:first-child' );
-					var secondSlide = document.querySelector( '.reveal .slides>section:nth-child(2)>section' );
+					var firstSlide = document.querySelector( '.reveal .slides>[data-slide]:first-child' );
+					var secondSlide = document.querySelector( '.reveal .slides>[data-slide]:nth-child(2)>[data-slide]' );
 
 					assert.equal( Reveal.getPreviousSlide(), firstSlide, 'previous is slide #0' );
 					assert.equal( Reveal.getCurrentSlide(), secondSlide, 'current is slide #1' );
@@ -258,7 +258,7 @@
 					Reveal.slide( 0, 0 );
 					assert.strictEqual( Reveal.getProgress(), 0, 'progress is 0 on first slide' );
 
-					var lastSlideIndex = document.querySelectorAll( '.reveal .slides>section' ).length - 1;
+					var lastSlideIndex = document.querySelectorAll( '.reveal .slides>[data-slide]' ).length - 1;
 
 					Reveal.slide( lastSlideIndex, 0 );
 					assert.strictEqual( Reveal.getProgress(), 1, 'progress is 1 on last slide' );
@@ -468,7 +468,7 @@
 					assert.deepEqual( Reveal.getIndices(), { h: 2, v: 0, f: 1 }, 'Reveal.slide( 2, 0, 1 )' );
 				});
 
-				QUnit.test( 'data-fragment is set on slide <section>', function( assert ) {
+				QUnit.test( 'data-fragment is set on slide <section data-slide>', function( assert ) {
 					Reveal.slide( 2, 0, -1 );
 					assert.deepEqual( Reveal.getCurrentSlide().getAttribute( 'data-fragment' ), '-1' );
 
@@ -485,7 +485,7 @@
 				});
 
 				QUnit.test( 'Hiding all fragments', function( assert ) {
-					var fragmentSlide = document.querySelector( '#fragment-slides>section:nth-child(1)' );
+					var fragmentSlide = document.querySelector( '#fragment-slides>[data-slide]:nth-child(1)' );
 
 					Reveal.slide( 2, 0, 0 );
 					assert.strictEqual( fragmentSlide.querySelectorAll( '.fragment.visible' ).length, 1, 'one fragment visible when index is 0' );
@@ -495,7 +495,7 @@
 				});
 
 				QUnit.test( 'Current fragment', function( assert ) {
-					var fragmentSlide = document.querySelector( '#fragment-slides>section:nth-child(1)' );
+					var fragmentSlide = document.querySelector( '#fragment-slides>[data-slide]:nth-child(1)' );
 					var lastFragmentIndex = [].slice.call( fragmentSlide.querySelectorAll( '.fragment' ) ).pop().getAttribute( 'data-fragment-index' );
 
 					Reveal.slide( 2, 0 );
@@ -544,7 +544,7 @@
 				});
 
 				QUnit.test( 'Stepping past fragments', function( assert ) {
-					var fragmentSlide = document.querySelector( '#fragment-slides>section:nth-child(1)' );
+					var fragmentSlide = document.querySelector( '#fragment-slides>[data-slide]:nth-child(1)' );
 
 					Reveal.slide( 0, 0, 0 );
 					assert.equal( fragmentSlide.querySelectorAll( '.fragment.visible' ).length, 0, 'no fragments visible when on previous slide' );
@@ -554,7 +554,7 @@
 				});
 
 				QUnit.test( 'Fragment indices', function( assert ) {
-					var fragmentSlide = document.querySelector( '#fragment-slides>section:nth-child(2)' );
+					var fragmentSlide = document.querySelector( '#fragment-slides>[data-slide]:nth-child(2)' );
 
 					Reveal.slide( 3, 0, 0 );
 					assert.equal( fragmentSlide.querySelectorAll( '.fragment.visible' ).length, 2, 'both fragments of same index are shown' );
@@ -568,7 +568,7 @@
 				});
 
 				QUnit.test( 'Index generation', function( assert ) {
-					var fragmentSlide = document.querySelector( '#fragment-slides>section:nth-child(1)' );
+					var fragmentSlide = document.querySelector( '#fragment-slides>[data-slide]:nth-child(1)' );
 
 					// These have no indices defined to start with
 					assert.equal( fragmentSlide.querySelectorAll( '.fragment' )[0].getAttribute( 'data-fragment-index' ), '0' );
@@ -577,7 +577,7 @@
 				});
 
 				QUnit.test( 'Index normalization', function( assert ) {
-					var fragmentSlide = document.querySelector( '#fragment-slides>section:nth-child(3)' );
+					var fragmentSlide = document.querySelector( '#fragment-slides>[data-slide]:nth-child(3)' );
 
 					// These start out as 1-4-4 and should normalize to 0-1-1
 					assert.equal( fragmentSlide.querySelectorAll( '.fragment' )[0].getAttribute( 'data-fragment-index' ), '0' );
@@ -746,24 +746,24 @@
 				QUnit.module( 'Lazy-Loading' );
 
 				QUnit.test( 'img with data-src', function( assert ) {
-					assert.strictEqual( document.querySelectorAll( '.reveal section img[src]' ).length, 1, 'Image source has been set' );
+					assert.strictEqual( document.querySelectorAll( '.reveal [data-slide] img[src]' ).length, 1, 'Image source has been set' );
 				});
 
 				QUnit.test( 'video with data-src', function( assert ) {
-					assert.strictEqual( document.querySelectorAll( '.reveal section video[src]' ).length, 1, 'Video source has been set' );
+					assert.strictEqual( document.querySelectorAll( '.reveal [data-slide] video[src]' ).length, 1, 'Video source has been set' );
 				});
 
 				QUnit.test( 'audio with data-src', function( assert ) {
-					assert.strictEqual( document.querySelectorAll( '.reveal section audio[src]' ).length, 1, 'Audio source has been set' );
+					assert.strictEqual( document.querySelectorAll( '.reveal [data-slide] audio[src]' ).length, 1, 'Audio source has been set' );
 				});
 
 				QUnit.test( 'iframe with data-src', function( assert ) {
 					Reveal.slide( 0, 0 );
-					assert.strictEqual( document.querySelectorAll( '.reveal section iframe[src]' ).length, 0, 'Iframe source is not set' );
+					assert.strictEqual( document.querySelectorAll( '.reveal [data-slide] iframe[src]' ).length, 0, 'Iframe source is not set' );
 					Reveal.slide( 2, 1 );
-					assert.strictEqual( document.querySelectorAll( '.reveal section iframe[src]' ).length, 1, 'Iframe source is set' );
+					assert.strictEqual( document.querySelectorAll( '.reveal [data-slide] iframe[src]' ).length, 1, 'Iframe source is set' );
 					Reveal.slide( 2, 2 );
-					assert.strictEqual( document.querySelectorAll( '.reveal section iframe[src]' ).length, 0, 'Iframe source is not set' );
+					assert.strictEqual( document.querySelectorAll( '.reveal [data-slide] iframe[src]' ).length, 0, 'Iframe source is not set' );
 				});
 
 				QUnit.test( 'background images', function( assert ) {

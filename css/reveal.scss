@@ -48,7 +48,7 @@ html.reveal-full-page {
  * VIEW FRAGMENTS
  *********************************************/
 
-.reveal .slides section .fragment {
+.reveal .slides [data-slide] .fragment {
 	opacity: 0;
 	visibility: hidden;
 	transition: all .2s ease;
@@ -64,7 +64,7 @@ html.reveal-full-page {
 	}
 }
 
-.reveal .slides section .fragment.grow {
+.reveal .slides [data-slide] .fragment.grow {
 	opacity: 1;
 	visibility: inherit;
 
@@ -73,7 +73,7 @@ html.reveal-full-page {
 	}
 }
 
-.reveal .slides section .fragment.shrink {
+.reveal .slides [data-slide] .fragment.shrink {
 	opacity: 1;
 	visibility: inherit;
 
@@ -82,7 +82,7 @@ html.reveal-full-page {
 	}
 }
 
-.reveal .slides section .fragment.zoom-in {
+.reveal .slides [data-slide] .fragment.zoom-in {
 	transform: scale( 0.1 );
 
 	&.visible {
@@ -90,7 +90,7 @@ html.reveal-full-page {
 	}
 }
 
-.reveal .slides section .fragment.fade-out {
+.reveal .slides [data-slide] .fragment.fade-out {
 	opacity: 1;
 	visibility: inherit;
 
@@ -100,7 +100,7 @@ html.reveal-full-page {
 	}
 }
 
-.reveal .slides section .fragment.semi-fade-out {
+.reveal .slides [data-slide] .fragment.semi-fade-out {
 	opacity: 1;
 	visibility: inherit;
 
@@ -110,7 +110,7 @@ html.reveal-full-page {
 	}
 }
 
-.reveal .slides section .fragment.strike {
+.reveal .slides [data-slide] .fragment.strike {
 	opacity: 1;
 	visibility: inherit;
 
@@ -119,7 +119,7 @@ html.reveal-full-page {
 	}
 }
 
-.reveal .slides section .fragment.fade-up {
+.reveal .slides [data-slide] .fragment.fade-up {
 	transform: translate(0, 40px);
 
 	&.visible {
@@ -127,7 +127,7 @@ html.reveal-full-page {
 	}
 }
 
-.reveal .slides section .fragment.fade-down {
+.reveal .slides [data-slide] .fragment.fade-down {
 	transform: translate(0, -40px);
 
 	&.visible {
@@ -135,7 +135,7 @@ html.reveal-full-page {
 	}
 }
 
-.reveal .slides section .fragment.fade-right {
+.reveal .slides [data-slide] .fragment.fade-right {
 	transform: translate(-40px, 0);
 
 	&.visible {
@@ -143,7 +143,7 @@ html.reveal-full-page {
 	}
 }
 
-.reveal .slides section .fragment.fade-left {
+.reveal .slides [data-slide] .fragment.fade-left {
 	transform: translate(40px, 0);
 
 	&.visible {
@@ -151,8 +151,8 @@ html.reveal-full-page {
 	}
 }
 
-.reveal .slides section .fragment.fade-in-then-out,
-.reveal .slides section .fragment.current-visible {
+.reveal .slides [data-slide] .fragment.fade-in-then-out,
+.reveal .slides [data-slide] .fragment.current-visible {
 	opacity: 0;
 	visibility: hidden;
 
@@ -162,7 +162,7 @@ html.reveal-full-page {
 	}
 }
 
-.reveal .slides section .fragment.fade-in-then-semi-out {
+.reveal .slides [data-slide] .fragment.fade-in-then-semi-out {
 	opacity: 0;
 	visibility: hidden;
 
@@ -177,32 +177,32 @@ html.reveal-full-page {
 	}
 }
 
-.reveal .slides section .fragment.highlight-red,
-.reveal .slides section .fragment.highlight-current-red,
-.reveal .slides section .fragment.highlight-green,
-.reveal .slides section .fragment.highlight-current-green,
-.reveal .slides section .fragment.highlight-blue,
-.reveal .slides section .fragment.highlight-current-blue {
+.reveal .slides [data-slide] .fragment.highlight-red,
+.reveal .slides [data-slide] .fragment.highlight-current-red,
+.reveal .slides [data-slide] .fragment.highlight-green,
+.reveal .slides [data-slide] .fragment.highlight-current-green,
+.reveal .slides [data-slide] .fragment.highlight-blue,
+.reveal .slides [data-slide] .fragment.highlight-current-blue {
 	opacity: 1;
 	visibility: inherit;
 }
-	.reveal .slides section .fragment.highlight-red.visible {
+	.reveal .slides [data-slide] .fragment.highlight-red.visible {
 		color: #ff2c2d
 	}
-	.reveal .slides section .fragment.highlight-green.visible {
+	.reveal .slides [data-slide] .fragment.highlight-green.visible {
 		color: #17ff2e;
 	}
-	.reveal .slides section .fragment.highlight-blue.visible {
+	.reveal .slides [data-slide] .fragment.highlight-blue.visible {
 		color: #1b91ff;
 	}
 
-.reveal .slides section .fragment.highlight-current-red.current-fragment {
+.reveal .slides [data-slide] .fragment.highlight-current-red.current-fragment {
 	color: #ff2c2d
 }
-.reveal .slides section .fragment.highlight-current-green.current-fragment {
+.reveal .slides [data-slide] .fragment.highlight-current-green.current-fragment {
 	color: #17ff2e;
 }
-.reveal .slides section .fragment.highlight-current-blue.current-fragment {
+.reveal .slides [data-slide] .fragment.highlight-current-blue.current-fragment {
 	color: #1b91ff;
 }
 
@@ -648,12 +648,12 @@ $controlsArrowAngleActive: 36deg;
 	perspective-origin: 50% 40%;
 }
 
-.reveal .slides>section {
+.reveal .slides>[data-slide] {
 	perspective: 600px;
 }
 
-.reveal .slides>section,
-.reveal .slides>section>section {
+.reveal .slides>[data-slide],
+.reveal .slides>[data-slide]>[data-slide] {
 	display: none;
 	position: absolute;
 	width: 100%;
@@ -668,63 +668,63 @@ $controlsArrowAngleActive: 36deg;
 }
 
 /* Global transition speed settings */
-.reveal[data-transition-speed="fast"] .slides section {
+.reveal[data-transition-speed="fast"] .slides [data-slide] {
 	transition-duration: 400ms;
 }
-.reveal[data-transition-speed="slow"] .slides section {
+.reveal[data-transition-speed="slow"] .slides [data-slide] {
 	transition-duration: 1200ms;
 }
 
 /* Slide-specific transition speed overrides */
-.reveal .slides section[data-transition-speed="fast"] {
+.reveal .slides [data-slide][data-transition-speed="fast"] {
 	transition-duration: 400ms;
 }
-.reveal .slides section[data-transition-speed="slow"] {
+.reveal .slides [data-slide][data-transition-speed="slow"] {
 	transition-duration: 1200ms;
 }
 
-.reveal .slides>section.stack {
+.reveal .slides>[data-slide].stack {
 	padding-top: 0;
 	padding-bottom: 0;
 	pointer-events: none;
 	height: 100%;
 }
 
-.reveal .slides>section.present,
-.reveal .slides>section>section.present {
+.reveal .slides>[data-slide].present,
+.reveal .slides>[data-slide]>[data-slide].present {
 	display: block;
 	z-index: 11;
 	opacity: 1;
 }
 
-.reveal .slides>section:empty,
-.reveal .slides>section>section:empty,
-.reveal .slides>section[data-background-interactive],
-.reveal .slides>section>section[data-background-interactive] {
+.reveal .slides>[data-slide]:empty,
+.reveal .slides>[data-slide]>[data-slide]:empty,
+.reveal .slides>[data-slide][data-background-interactive],
+.reveal .slides>[data-slide]>[data-slide][data-background-interactive] {
 	pointer-events: none;
 }
 
 .reveal.center,
 .reveal.center .slides,
-.reveal.center .slides section {
+.reveal.center .slides [data-slide] {
 	min-height: 0 !important;
 }
 
 /* Don't allow interaction with invisible slides */
-.reveal .slides>section:not(.present),
-.reveal .slides>section>section:not(.present) {
+.reveal .slides>[data-slide]:not(.present),
+.reveal .slides>[data-slide]>[data-slide]:not(.present) {
 	pointer-events: none;
 }
 
-.reveal.overview .slides>section,
-.reveal.overview .slides>section>section {
+.reveal.overview .slides>[data-slide],
+.reveal.overview .slides>[data-slide]>[data-slide] {
 	pointer-events: auto;
 }
 
-.reveal .slides>section.past,
-.reveal .slides>section.future,
-.reveal .slides>section>section.past,
-.reveal .slides>section>section.future {
+.reveal .slides>[data-slide].past,
+.reveal .slides>[data-slide].future,
+.reveal .slides>[data-slide]>[data-slide].past,
+.reveal .slides>[data-slide]>[data-slide].future {
 	opacity: 0;
 }
 
@@ -734,43 +734,43 @@ $controlsArrowAngleActive: 36deg;
  *********************************************/
 
 @mixin transition-global($style) {
-	.reveal .slides section[data-transition=#{$style}],
-	.reveal.#{$style} .slides section:not([data-transition]) {
+	.reveal .slides [data-slide][data-transition=#{$style}],
+	.reveal.#{$style} .slides [data-slide]:not([data-transition]) {
 		@content;
 	}
 }
 @mixin transition-stack($style) {
-	.reveal .slides section[data-transition=#{$style}].stack,
-	.reveal.#{$style} .slides section.stack {
+	.reveal .slides [data-slide][data-transition=#{$style}].stack,
+	.reveal.#{$style} .slides [data-slide].stack {
 		@content;
 	}
 }
 @mixin transition-horizontal-past($style) {
-	.reveal .slides>section[data-transition=#{$style}].past,
-	.reveal .slides>section[data-transition~=#{$style}-out].past,
-	.reveal.#{$style} .slides>section:not([data-transition]).past {
+	.reveal .slides>[data-slide][data-transition=#{$style}].past,
+	.reveal .slides>[data-slide][data-transition~=#{$style}-out].past,
+	.reveal.#{$style} .slides>[data-slide]:not([data-transition]).past {
 		@content;
 	}
 }
 @mixin transition-horizontal-future($style) {
-	.reveal .slides>section[data-transition=#{$style}].future,
-	.reveal .slides>section[data-transition~=#{$style}-in].future,
-	.reveal.#{$style} .slides>section:not([data-transition]).future {
+	.reveal .slides>[data-slide][data-transition=#{$style}].future,
+	.reveal .slides>[data-slide][data-transition~=#{$style}-in].future,
+	.reveal.#{$style} .slides>[data-slide]:not([data-transition]).future {
 		@content;
 	}
 }
 
 @mixin transition-vertical-past($style) {
-	.reveal .slides>section>section[data-transition=#{$style}].past,
-	.reveal .slides>section>section[data-transition~=#{$style}-out].past,
-	.reveal.#{$style} .slides>section>section:not([data-transition]).past {
+	.reveal .slides>[data-slide]>[data-slide][data-transition=#{$style}].past,
+	.reveal .slides>[data-slide]>[data-slide][data-transition~=#{$style}-out].past,
+	.reveal.#{$style} .slides>[data-slide]>[data-slide]:not([data-transition]).past {
 		@content;
 	}
 }
 @mixin transition-vertical-future($style) {
-	.reveal .slides>section>section[data-transition=#{$style}].future,
-	.reveal .slides>section>section[data-transition~=#{$style}-in].future,
-	.reveal.#{$style} .slides>section>section:not([data-transition]).future {
+	.reveal .slides>[data-slide]>[data-slide][data-transition=#{$style}].future,
+	.reveal .slides>[data-slide]>[data-slide][data-transition~=#{$style}-in].future,
+	.reveal.#{$style} .slides>[data-slide]>[data-slide]:not([data-transition]).future {
 		@content;
 	}
 }
@@ -876,17 +876,17 @@ $controlsArrowAngleActive: 36deg;
 	perspective: 1300px;
 }
 
-.reveal.cube .slides section {
+.reveal.cube .slides [data-slide] {
 	padding: 30px;
 	min-height: 700px;
 	backface-visibility: hidden;
 	box-sizing: border-box;
 	transform-style: preserve-3d;
 }
-	.reveal.center.cube .slides section {
+	.reveal.center.cube .slides [data-slide] {
 		min-height: 0;
 	}
-	.reveal.cube .slides section:not(.stack):before {
+	.reveal.cube .slides [data-slide]:not(.stack):before {
 		content: '';
 		position: absolute;
 		display: block;
@@ -898,7 +898,7 @@ $controlsArrowAngleActive: 36deg;
 		border-radius: 4px;
 		transform: translateZ( -20px );
 	}
-	.reveal.cube .slides section:not(.stack):after {
+	.reveal.cube .slides [data-slide]:not(.stack):after {
 		content: '';
 		position: absolute;
 		display: block;
@@ -914,27 +914,27 @@ $controlsArrowAngleActive: 36deg;
 		transform: translateZ(-90px) rotateX( 65deg );
 	}
 
-.reveal.cube .slides>section.stack {
+.reveal.cube .slides>[data-slide].stack {
 	padding: 0;
 	background: none;
 }
 
-.reveal.cube .slides>section.past {
+.reveal.cube .slides>[data-slide].past {
 	transform-origin: 100% 0%;
 	transform: translate3d(-100%, 0, 0) rotateY(-90deg);
 }
 
-.reveal.cube .slides>section.future {
+.reveal.cube .slides>[data-slide].future {
 	transform-origin: 0% 0%;
 	transform: translate3d(100%, 0, 0) rotateY(90deg);
 }
 
-.reveal.cube .slides>section>section.past {
+.reveal.cube .slides>[data-slide]>[data-slide].past {
 	transform-origin: 0% 100%;
 	transform: translate3d(0, -100%, 0) rotateX(90deg);
 }
 
-.reveal.cube .slides>section>section.future {
+.reveal.cube .slides>[data-slide]>[data-slide].future {
 	transform-origin: 0% 0%;
 	transform: translate3d(0, 100%, 0) rotateX(-90deg);
 }
@@ -953,16 +953,16 @@ $controlsArrowAngleActive: 36deg;
 	perspective: 3000px;
 }
 
-.reveal.page .slides section {
+.reveal.page .slides [data-slide] {
 	padding: 30px;
 	min-height: 700px;
 	box-sizing: border-box;
 	transform-style: preserve-3d;
 }
-	.reveal.page .slides section.past {
+	.reveal.page .slides [data-slide].past {
 		z-index: 12;
 	}
-	.reveal.page .slides section:not(.stack):before {
+	.reveal.page .slides [data-slide]:not(.stack):before {
 		content: '';
 		position: absolute;
 		display: block;
@@ -973,7 +973,7 @@ $controlsArrowAngleActive: 36deg;
 		background: rgba(0,0,0,0.1);
 		transform: translateZ( -20px );
 	}
-	.reveal.page .slides section:not(.stack):after {
+	.reveal.page .slides [data-slide]:not(.stack):after {
 		content: '';
 		position: absolute;
 		display: block;
@@ -990,27 +990,27 @@ $controlsArrowAngleActive: 36deg;
 		-webkit-transform: translateZ(-90px) rotateX( 65deg );
 	}
 
-.reveal.page .slides>section.stack {
+.reveal.page .slides>[data-slide].stack {
 	padding: 0;
 	background: none;
 }
 
-.reveal.page .slides>section.past {
+.reveal.page .slides>[data-slide].past {
 	transform-origin: 0% 0%;
 	transform: translate3d(-40%, 0, 0) rotateY(-80deg);
 }
 
-.reveal.page .slides>section.future {
+.reveal.page .slides>[data-slide].future {
 	transform-origin: 100% 0%;
 	transform: translate3d(0, 0, 0);
 }
 
-.reveal.page .slides>section>section.past {
+.reveal.page .slides>[data-slide]>[data-slide].past {
 	transform-origin: 0% 0%;
 	transform: translate3d(0, -40%, 0) rotateX(80deg);
 }
 
-.reveal.page .slides>section>section.future {
+.reveal.page .slides>[data-slide]>[data-slide].future {
 	transform-origin: 0% 100%;
 	transform: translate3d(0, 0, 0);
 }
@@ -1020,16 +1020,16 @@ $controlsArrowAngleActive: 36deg;
  * FADE TRANSITION
  *********************************************/
 
-.reveal .slides section[data-transition=fade],
-.reveal.fade .slides section:not([data-transition]),
-.reveal.fade .slides>section>section:not([data-transition]) {
+.reveal .slides [data-slide][data-transition=fade],
+.reveal.fade .slides [data-slide]:not([data-transition]),
+.reveal.fade .slides>[data-slide]>[data-slide]:not([data-transition]) {
 	transform: none;
 	transition: opacity 0.5s;
 }
 
 
-.reveal.fade.overview .slides section,
-.reveal.fade.overview .slides>section>section {
+.reveal.fade.overview .slides [data-slide],
+.reveal.fade.overview .slides>[data-slide]>[data-slide] {
 	transition: none;
 }
 
@@ -1091,11 +1091,11 @@ $controlsArrowAngleActive: 36deg;
 
 .reveal .no-transition,
 .reveal .no-transition *,
-.reveal .slides.disable-slide-transitions section {
+.reveal .slides.disable-slide-transitions [data-slide] {
 	transition: none !important;
 }
 
-.reveal .slides.disable-slide-transitions section {
+.reveal .slides.disable-slide-transitions [data-slide] {
 	transform: none !important;
 }
 
@@ -1293,7 +1293,7 @@ $controlsArrowAngleActive: 36deg;
 	will-change: opacity;
 }
 
-.reveal section[data-auto-animate]:not(.stack):not([data-auto-animate="running"]) [data-auto-animate-target^="unmatched"] {
+.reveal [data-slide][data-auto-animate]:not(.stack):not([data-auto-animate="running"]) [data-auto-animate-target^="unmatched"] {
 	opacity: 0;
 }
 
@@ -1312,7 +1312,7 @@ $controlsArrowAngleActive: 36deg;
 		-moz-transform-style: preserve-3d;
 	}
 
-	.slides section {
+	.slides [data-slide] {
 		height: 100%;
 		top: 0 !important;
 		opacity: 1 !important;
@@ -1321,20 +1321,20 @@ $controlsArrowAngleActive: 36deg;
 		cursor: pointer;
 		box-sizing: border-box;
 	}
-	.slides section:hover,
-	.slides section.present {
+	.slides [data-slide]:hover,
+	.slides [data-slide].present {
 		outline: 10px solid rgba(150,150,150,0.4);
 		outline-offset: 10px;
 	}
-	.slides section .fragment {
+	.slides [data-slide] .fragment {
 		opacity: 1;
 		transition: none;
 	}
-	.slides section:after,
-	.slides section:before {
+	.slides [data-slide]:after,
+	.slides [data-slide]:before {
 		display: none !important;
 	}
-	.slides>section.stack {
+	.slides>[data-slide].stack {
 		padding: 0;
 		top: 0 !important;
 		background: none;
@@ -1366,8 +1366,8 @@ $controlsArrowAngleActive: 36deg;
 
 // Disable transitions transitions while we're activating
 // or deactivating the overview mode.
-.reveal.overview .slides section,
-.reveal.overview-deactivating .slides section {
+.reveal.overview .slides [data-slide],
+.reveal.overview-deactivating .slides [data-slide] {
 	transition: none;
 }
 

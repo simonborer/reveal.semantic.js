@@ -88,7 +88,7 @@ export default class Notes {
 	/**
 	 * Retrieves the speaker notes from a slide. Notes can be
 	 * defined in two ways:
-	 * 1. As a data-notes attribute on the slide <section>
+	 * 1. As a data-notes attribute on the slide
 	 * 2. As an <aside class="notes"> inside of the slide
 	 *
 	 * @param {HTMLElement} [slide=currentSlide]

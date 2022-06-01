@@ -37,7 +37,7 @@ export default class Backgrounds {
 			let backgroundStack = this.createBackground( slideh, this.element );
 
 			// Iterate over all vertical slides
-			queryAll( slideh, 'section' ).forEach( slidev => {
+			queryAll( slideh, '[data-slide]' ).forEach( slidev => {
 
 				this.createBackground( slidev, backgroundStack );
 

@@ -40,7 +40,7 @@ export default class Print {
 		createStyleSheet( '@page{size:'+ pageWidth +'px '+ pageHeight +'px; margin: 0px;}' );
 
 		// Limit the size of certain elements to the dimensions of the slide
-		createStyleSheet( '.reveal section>img, .reveal section>video, .reveal section>iframe{max-width: '+ slideWidth +'px; max-height:'+ slideHeight +'px}' );
+		createStyleSheet( '.reveal [data-slide]>img, .reveal [data-slide]>video, .reveal [data-slide]>iframe{max-width: '+ slideWidth +'px; max-height:'+ slideHeight +'px}' );
 
 		document.documentElement.classList.add( 'print-pdf' );
 		document.body.style.width = pageWidth + 'px';
@@ -71,7 +71,7 @@ export default class Print {
 		// Slide and slide background layout
 		slides.forEach( function( slide, index ) {
 
-			// Vertical stacks are not centred since their section
+			// Vertical stacks are not centred since their [data-slide]
 			// children will be
 			if( slide.classList.contains( 'stack' ) === false ) {
 				// Center the slide inside of the page, giving the slide some margin

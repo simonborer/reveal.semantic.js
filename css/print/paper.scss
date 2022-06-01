@@ -106,7 +106,7 @@
 
 			perspective-origin: 50% 50%;
 		}
-		.reveal .slides section {
+		.reveal .slides [data-slide] {
 			visibility: visible !important;
 			position: static !important;
 			width: auto !important;
@@ -129,13 +129,13 @@
 			transform: none !important;
 			transition: none !important;
 		}
-		.reveal .slides section.stack {
+		.reveal .slides [data-slide].stack {
 			padding: 0 !important;
 		}
-		.reveal section:last-of-type {
+		.reveal [data-slide]:last-of-type {
 			page-break-after: avoid !important;
 		}
-		.reveal section .fragment {
+		.reveal [data-slide] .fragment {
 			opacity: 1 !important;
 			visibility: visible !important;
 
@@ -146,7 +146,7 @@
 			white-space: normal !important;
 		}
 
-		.reveal section img {
+		.reveal [data-slide] img {
 			display: block;
 			margin: 15px 0px;
 			background: rgba(255,255,255,1);
@@ -154,7 +154,7 @@
 			box-shadow: none;
 		}
 
-		.reveal section small {
+		.reveal [data-slide] small {
 			font-size: 0.8em;
 		}
 

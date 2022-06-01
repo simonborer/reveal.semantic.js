@@ -1,7 +1,7 @@
 
-export const SLIDES_SELECTOR = '.slides section';
-export const HORIZONTAL_SLIDES_SELECTOR = '.slides>section';
-export const VERTICAL_SLIDES_SELECTOR = '.slides>section.present>section';
+export const SLIDES_SELECTOR = '.slides [data-slide]';
+export const HORIZONTAL_SLIDES_SELECTOR = '.slides>[data-slide]';
+export const VERTICAL_SLIDES_SELECTOR = '.slides>[data-slide].present>[data-slide]';
 
 // Methods that may not be invoked via the postMessage API
 export const POST_MESSAGE_METHOD_BLACKLIST = /registerPlugin|registerKeyboardShortcut|addKeyBinding|addEventListener|showPreview/;
